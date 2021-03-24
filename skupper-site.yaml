@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  console: "true"
+  console-authentication: internal
+  console-password: "admin"
+  console-user: "admin"
+  ingress: loadbalancer
+  name: skupper-site
+  router-console: "true"
+  router-mode: interior
+  service-controller: "true"
+  service-sync: "true"
+metadata:
+  name: skupper-site
