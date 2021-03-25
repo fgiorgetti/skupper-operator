@@ -15,4 +15,7 @@
 # vendor/
 .idea/
 bin/
+cache/
 opm
+index_build_tmp*
+index.Dockerfile*

@@ -142,6 +142,47 @@ spec:
           - create
           - patch
         serviceAccountName: skupper-operator-controller-manager
+      - rules:
+        - apiGroups:
+          - apps
+          resources:
+          - deployments
+          - statefulsets
+          - daemonsets
+          verbs:
+          - get
+          - list
+          - watch
+          - create
+          - update
+          - patch
+          - delete
+        - apiGroups:
+          - ""
+          - coordination.k8s.io
+          resources:
+          - pods
+          - secrets
+          - configmaps
+          - services
+          - serviceaccounts
+          - leases
+          verbs:
+          - get
+          - list
+          - watch
+          - create
+          - update
+          - patch
+          - delete
+        - apiGroups:
+          - ""
+          resources:
+          - events
+          verbs:
+          - create
+          - patch
+        serviceAccountName: skupper-service-controller
     strategy: deployment
   installModes:
   - supported: true
