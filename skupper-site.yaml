@@ -5,7 +5,6 @@ data:
   console-authentication: internal
   console-password: "admin"
   console-user: "admin"
-  ingress: loadbalancer
   name: skupper-site
   router-console: "true"
   router-mode: interior
