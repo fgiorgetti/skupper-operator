@@ -13,3 +13,4 @@ data:
   service-sync: "true"
 metadata:
   name: skupper-site
+  namespace: skupper-sandbox
