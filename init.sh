@@ -6,6 +6,6 @@ waitRunning openshift-marketplace skupper-operator
 
 kubectl apply -f operatorgroup-ocp.yaml
 kubectl apply -f subscription-ocp.yaml
-waitRunning skupper-sandbox skupper-operator
+waitRunning skupper-sandbox skupper-site-controller
 
 kubectl apply -f skupper-site.yaml
