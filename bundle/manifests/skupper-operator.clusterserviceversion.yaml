@@ -2,7 +2,26 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: ClusterServiceVersion
 metadata:
   annotations:
-    alm-examples: '[]'
+    alm-examples: |-
+      [
+        {
+          apiVersion: v1
+          kind: ConfigMap
+          data:
+            console: "true"
+            console-authentication: internal
+            console-password: "admin"
+            console-user: "admin"
+            name: skupper-site
+            router-console: "true"
+            router-mode: interior
+            service-controller: "true"
+            service-sync: "true"
+          metadata:
+            name: skupper-site
+            namespace: skupper-sandbox
+        }
+      ]
     capabilities: Basic Install
     operators.operatorframework.io/builder: operator-sdk-v1.4.0+git
     operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
