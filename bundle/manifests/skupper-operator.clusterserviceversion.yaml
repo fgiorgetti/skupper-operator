@@ -19,7 +19,6 @@ metadata:
             service-sync: "true"
           metadata:
             name: skupper-site
-            namespace: skupper-sandbox
         }
       ]
     capabilities: Basic Install
