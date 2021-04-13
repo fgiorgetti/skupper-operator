@@ -47,6 +47,8 @@ spec:
           - apps
           resources:
           - deployments
+          - statefulsets
+          - daemonsets
           verbs:
           - get
           - list
@@ -69,14 +71,13 @@ spec:
           - delete
         - apiGroups:
           - ""
-          - coordination.k8s.io
           resources:
           - pods
+          - pods/exec
           - secrets
           - configmaps
           - serviceaccounts
           - services
-          - leases
           verbs:
           - get
           - list
@@ -86,24 +87,16 @@ spec:
           - patch
           - delete
         - apiGroups:
-          - ""
+          - rbac.authorization.k8s.io
           resources:
-          - events
+          - rolebindings
+          - roles
           verbs:
+          - get
+          - list
+          - watch
           - create
-          - patch
-        - apiGroups:
-          - authentication.k8s.io
-          resources:
-          - tokenreviews
-          verbs:
-          - create
-        - apiGroups:
-          - authorization.k8s.io
-          resources:
-          - subjectaccessreviews
-          verbs:
-          - create
+          - delete
         serviceAccountName: skupper-site-controller
       permissions:
       - rules:
@@ -111,6 +104,8 @@ spec:
           - apps
           resources:
           - deployments
+          - statefulsets
+          - daemonsets
           verbs:
           - get
           - list
@@ -133,14 +128,13 @@ spec:
           - delete
         - apiGroups:
           - ""
-          - coordination.k8s.io
           resources:
           - pods
+          - pods/exec
           - secrets
           - configmaps
-          - services
           - serviceaccounts
-          - leases
+          - services
           verbs:
           - get
           - list
@@ -150,12 +144,16 @@ spec:
           - patch
           - delete
         - apiGroups:
-          - ""
+          - rbac.authorization.k8s.io
           resources:
-          - events
+          - rolebindings
+          - roles
           verbs:
+          - get
+          - list
+          - watch
           - create
-          - patch
+          - delete
         serviceAccountName: skupper-site-controller
       - rules:
         - apiGroups:
@@ -186,14 +184,13 @@ spec:
           - delete
         - apiGroups:
           - ""
-          - coordination.k8s.io
           resources:
           - pods
+          - pods/exec
           - secrets
           - configmaps
           - services
           - serviceaccounts
-          - leases
           verbs:
           - get
           - list
@@ -202,13 +199,6 @@ spec:
           - update
           - patch
           - delete
-        - apiGroups:
-          - ""
-          resources:
-          - events
-          verbs:
-          - create
-          - patch
         serviceAccountName: skupper-service-controller
       - rules:
         - apiGroups:
@@ -239,14 +229,13 @@ spec:
           - delete
         - apiGroups:
           - ""
-          - coordination.k8s.io
           resources:
           - pods
+          - pods/exec
           - secrets
           - configmaps
           - services
           - serviceaccounts
-          - leases
           verbs:
           - get
           - list
@@ -255,13 +244,6 @@ spec:
           - update
           - patch
           - delete
-        - apiGroups:
-          - ""
-          resources:
-          - events
-          verbs:
-          - create
-          - patch
         serviceAccountName: skupper-router
       deployments:
       - name: skupper-site-controller
