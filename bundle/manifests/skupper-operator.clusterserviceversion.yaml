@@ -2,25 +2,7 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: ClusterServiceVersion
 metadata:
   annotations:
-    alm-examples: |-
-      [
-        {
-          apiVersion: v1
-          kind: ConfigMap
-          data:
-            console: "true"
-            console-authentication: internal
-            console-password: "admin"
-            console-user: "admin"
-            name: skupper-site
-            router-console: "true"
-            router-mode: interior
-            service-controller: "true"
-            service-sync: "true"
-          metadata:
-            name: skupper-site
-        }
-      ]
+    alm-examples: '[]'
     capabilities: Basic Install
     operators.operatorframework.io/builder: operator-sdk-v1.4.0+git
     operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
@@ -123,35 +105,6 @@ spec:
           verbs:
           - create
         serviceAccountName: skupper-site-controller
-      deployments:
-      - name: skupper-site-controller
-        spec:
-          replicas: 1
-          selector:
-            matchLabels:
-              control-plane: controller-manager
-          strategy: {}
-          template:
-            metadata:
-              labels:
-                control-plane: controller-manager
-            spec:
-              containers:
-              - command:
-                - /app/site-controller
-                image: quay.io/skupper/site-controller:0.5.1
-                name: manager
-                securityContext:
-                  allowPrivilegeEscalation: false
-                env:
-                - name: WATCH_NAMESPACE
-                  valueFrom:
-                    fieldRef:
-                      fieldPath: metadata.annotations['olm.targetNamespaces']
-              securityContext:
-                runAsNonRoot: false
-              serviceAccountName: skupper-site-controller
-              terminationGracePeriodSeconds: 10
       permissions:
       - rules:
         - apiGroups:
@@ -310,6 +263,35 @@ spec:
           - create
           - patch
         serviceAccountName: skupper-router
+      deployments:
+      - name: skupper-site-controller
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              control-plane: controller-manager
+          strategy: {}
+          template:
+            metadata:
+              labels:
+                control-plane: controller-manager
+            spec:
+              containers:
+              - command:
+                - /app/site-controller
+                image: quay.io/skupper/site-controller:0.5.1
+                name: manager
+                securityContext:
+                  allowPrivilegeEscalation: false
+                env:
+                - name: WATCH_NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.annotations['olm.targetNamespaces']
+              securityContext:
+                runAsNonRoot: false
+              serviceAccountName: skupper-site-controller
+              terminationGracePeriodSeconds: 10
     strategy: deployment
   installModes:
   - supported: true
@@ -327,10 +309,10 @@ spec:
   - van
   links:
   - name: Skupper Operator
-    url: https://skupper-operator.domain
+    url: https://github.com/skupperproject/skupper-operator
   maintainers:
-  - email: fgiorgetti@gmail.com
-    name: Fernando Giorgetti
+  - email: customerservice@redhat.com
+    name: Red Hat
   maturity: alpha
   provider:
     name: Skupper Project
